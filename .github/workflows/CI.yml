@@ -19,11 +19,6 @@ jobs:
           java-version: ${{ matrix.java-version }}
           distribution: 'zulu'
 
-      - name: Clone repo
-        uses: actions/checkout@master
-        with:
-          fetch-depth: 1
-
       - name: ktlint
         uses: ScaCap/action-ktlint@master
         with:
