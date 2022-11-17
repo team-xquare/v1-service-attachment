@@ -49,6 +49,41 @@ noArg {
     annotation("javax.persistence.Embeddable")
 }
 
+val ktlint: Configuration by configurations.creating
+
+dependencies {
+    ktlint(Dependencies.KTLINT) {
+        attributes {
+            attribute(Bundling.BUNDLING_ATTRIBUTE, objects.named(Bundling.EXTERNAL))
+        }
+    }
+}
+
+val outputDir = "${project.buildDir}/reports/ktlint/"
+val inputFiles = project.fileTree(mapOf("dir" to "src", "include" to "**/*.kt"))
+
+val ktlintCheck by tasks.creating(JavaExec::class) {
+    inputs.files(inputFiles)
+    outputs.dir(outputDir)
+
+    description = "Check Kotlin code style."
+    classpath = ktlint
+    mainClass.set("com.pinterest.ktlint.Main")
+    args = listOf("**/*.kt", "**/*.kts")
+}
+
+// Formatting all source files
+val ktlintFormat by tasks.creating(JavaExec::class) {
+    inputs.files(inputFiles)
+    outputs.dir(outputDir)
+
+    description = "Fix Kotlin code style deviations."
+    classpath = ktlint
+    mainClass.set("com.pinterest.ktlint.Main")
+    args = listOf("-F", "**/*.kt")
+    jvmArgs("--add-opens", "java.base/java.lang=ALL-UNNAMED")
+}
+
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
