@@ -29,6 +29,7 @@ dependencies {
     testImplementation(Dependencies.SPRING_SECURITY_TEST)
     implementation(Dependencies.AWS_S3)
     implementation(Dependencies.SENTRY)
+    implementation(Dependencies.CLOUD_CONFIG)
 }
 
 dependencyManagement {
