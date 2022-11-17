@@ -13,7 +13,6 @@ object Dependencies {
     const val KOTLIN_STDLIB = "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     const val JACKSON = "com.fasterxml.jackson.module:jackson-module-kotlin"
 
-
     // security
     const val SPRING_SECURITY = "org.springframework.boot:spring-boot-starter-security"
 
