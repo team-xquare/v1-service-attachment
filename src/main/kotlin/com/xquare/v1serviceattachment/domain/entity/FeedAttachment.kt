@@ -1,6 +1,6 @@
 package com.xquare.v1serviceattachment.domain.entity
 
-import com.fasterxml.uuid.Generators
+import com.github.f4b6a3.uuid.UuidCreator
 import java.util.*
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -11,11 +11,14 @@ class FeedAttachment(
 
     @Id
     @Column(columnDefinition = "BINARY(16)", nullable = false)
-    val id: UUID = Generators.timeBasedGenerator().generate(),
+    val id: UUID = UuidCreator.getTimeOrdered(),
 
     @Column(columnDefinition = "BINARY(16)", nullable = false)
-    val feedId: UUID,
+    val attachedId: UUID,
 
     @Column(columnDefinition = "VARCHAR(255)", nullable = false)
-    val fileName: String
+    val fileName: String,
+
+    @Column(columnDefinition = "VARCHAR(1024)", nullable = false)
+    val filePath: String
 )
