@@ -14,5 +14,5 @@ object DependencyVersions {
     const val VAULT_VERSION = "3.1.1"
     const val SENTRY_VERSION = "6.5.0"
     const val AWS_S3 = "2.2.6.RELEASE"
-    const val UUID_TIME_VERSION = "3.1.4"
+    const val UUID_V4_VERSION = "5.2.0"
 }

@@ -37,5 +37,5 @@ object Dependencies {
     const val CLOUD_CONFIG = "org.springframework.cloud:spring-cloud-config-client"
 
     // time based uuid
-    const val UUID_TIME = "com.fasterxml.uuid:java-uuid-generator:${DependencyVersions.UUID_TIME_VERSION}"
+    const val UUID_V4 = "com.github.f4b6a3:uuid-creator:${DependencyVersions.UUID_V4_VERSION}"
 }
