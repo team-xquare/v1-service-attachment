@@ -13,9 +13,9 @@ class FeedAttachment(
     @Column(columnDefinition = "BINARY(16)", nullable = false)
     val id: UUID = Generators.timeBasedGenerator().generate(),
 
-    @Column(columnDefinition = "BINARY(16)",nullable = false)
+    @Column(columnDefinition = "BINARY(16)", nullable = false)
     val feedId: UUID,
 
-    @Column(columnDefinition = "VARCHAR(255)",nullable = false)
+    @Column(columnDefinition = "VARCHAR(255)", nullable = false)
     val fileName: String
 )
