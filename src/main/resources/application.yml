@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: v1-service-attachment
+  profiles:
+    active: ${PROFILE}
+  config:
+    import: optional:configserver:https://api.xquare.app/cloud-config/
+  cloud:
+    config:
+      username: ${CLOUD_CONFIG_USERNAME}
+      password: ${CLOUD_CONFIG_PASSWORD}
