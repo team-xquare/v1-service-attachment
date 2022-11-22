@@ -30,7 +30,7 @@ dependencies {
     implementation(Dependencies.AWS_S3)
     implementation(Dependencies.SENTRY)
     implementation(Dependencies.CLOUD_CONFIG)
-    implementation(Dependencies.UUID_V4)
+    implementation(Dependencies.UUID_V6)
 }
 
 dependencyManagement {
