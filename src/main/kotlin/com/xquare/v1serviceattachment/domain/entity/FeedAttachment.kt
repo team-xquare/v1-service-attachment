@@ -5,7 +5,9 @@ import java.util.*
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
+import javax.persistence.Table
 
+@Table(name = "tbl_attachment")
 @Entity
 class FeedAttachment(
 
