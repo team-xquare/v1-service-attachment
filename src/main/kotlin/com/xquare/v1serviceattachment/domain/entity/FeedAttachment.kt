@@ -13,7 +13,7 @@ class FeedAttachment(
 
     @Id
     @Column(columnDefinition = "BINARY(16)", nullable = false)
-    val id: UUID = UuidCreator.getTimeOrdered(),
+    val id: UUID = UuidCreator.getTimeOrderedEpoch(),
 
     @Column(columnDefinition = "BINARY(16)", nullable = false)
     val attachedId: UUID,
