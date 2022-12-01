@@ -28,8 +28,6 @@ dependencies {
     implementation(Dependencies.KOTLIN_REFLECT)
     implementation(Dependencies.KOTLIN_STDLIB)
     implementation(Dependencies.JACKSON)
-    testImplementation(Dependencies.SPRING_TEST)
-    testImplementation(Dependencies.SPRING_SECURITY_TEST)
     implementation(Dependencies.AWS_S3)
     implementation(Dependencies.SENTRY)
     implementation(Dependencies.CLOUD_CONFIG)
