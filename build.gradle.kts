@@ -1,11 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "2.7.5"
-    id("io.spring.dependency-management") version "1.0.15.RELEASE"
-    kotlin("jvm") version "1.6.21"
-    kotlin("plugin.spring") version "1.6.21"
-    kotlin("plugin.jpa") version "1.6.21"
+    id("org.springframework.boot") version PluginVersions.SPRING_BOOT_VERSION
+    id("io.spring.dependency-management") version PluginVersions.DEPENDENCY_MANAGER_VERSION
+    kotlin("jvm") version PluginVersions.JVM_VERSION
+    kotlin("plugin.spring") version PluginVersions.SPRING_PLUGIN_VERSION
 }
 
 group = "com.xquare"
@@ -16,38 +15,24 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    implementation(Dependencies.SPRING_JPA)
-    implementation(Dependencies.SPRING_SECURITY)
-    implementation(Dependencies.VALIDATION)
-    implementation(Dependencies.SPRING_WEB)
-    implementation(Dependencies.KOTLIN_REFLECT)
-    implementation(Dependencies.KOTLIN_STDLIB)
-    implementation(Dependencies.JACKSON)
-    runtimeOnly(Dependencies.MYSQL)
-    testImplementation(Dependencies.SPRING_TEST)
-    testImplementation(Dependencies.SPRING_SECURITY_TEST)
-    implementation(Dependencies.AWS_S3)
-    implementation(Dependencies.SENTRY)
-    implementation(Dependencies.CLOUD_CONFIG)
-}
-
 dependencyManagement {
     imports {
         mavenBom(Dependencies.SPRING_CLOUD)
     }
 }
 
-allOpen {
-    annotation("javax.persistence.Entity")
-    annotation("javax.persistence.MappedSuperclass")
-    annotation("javax.persistence.Embeddable")
-}
-
-noArg {
-    annotation("javax.persistence.Entity")
-    annotation("javax.persistence.MappedSuperclass")
-    annotation("javax.persistence.Embeddable")
+dependencies {
+    implementation(Dependencies.SPRING_SECURITY)
+    implementation(Dependencies.VALIDATION)
+    implementation(Dependencies.SPRING_WEB)
+    implementation(Dependencies.KOTLIN_REFLECT)
+    implementation(Dependencies.KOTLIN_STDLIB)
+    implementation(Dependencies.JACKSON)
+    testImplementation(Dependencies.SPRING_TEST)
+    testImplementation(Dependencies.SPRING_SECURITY_TEST)
+    implementation(Dependencies.AWS_S3)
+    implementation(Dependencies.SENTRY)
+    implementation(Dependencies.CLOUD_CONFIG)
 }
 
 val ktlint: Configuration by configurations.creating

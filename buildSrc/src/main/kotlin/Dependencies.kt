@@ -29,10 +29,6 @@ object Dependencies {
     // aws
     const val AWS_S3 = "org.springframework.cloud:spring-cloud-starter-aws:${DependencyVersions.AWS_S3}"
 
-    // database
-    const val SPRING_JPA = "org.springframework.boot:spring-boot-starter-data-jpa"
-    const val MYSQL = "mysql:mysql-connector-java"
-
     // cloud config
     const val CLOUD_CONFIG = "org.springframework.cloud:spring-cloud-config-client"
 }
