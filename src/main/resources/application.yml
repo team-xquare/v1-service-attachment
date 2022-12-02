@@ -26,3 +26,5 @@ cloud:
       static: ${s3.region}
     stack:
       auto: false
+
+logging.level.com.amazonaws.util.EC2MetadataUtils: error
