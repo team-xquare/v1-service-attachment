@@ -16,10 +16,6 @@ object Dependencies {
     // security
     const val SPRING_SECURITY = "org.springframework.boot:spring-boot-starter-security"
 
-    // test
-    const val SPRING_TEST = "org.springframework.boot:spring-boot-starter-test:${PluginVersions.SPRING_BOOT_VERSION}"
-    const val SPRING_SECURITY_TEST = "org.springframework.security:spring-security-test"
-
     // cloud
     const val SPRING_CLOUD = "org.springframework.cloud:spring-cloud-dependencies:${DependencyVersions.SPRING_CLOUD_VERSION}"
 
@@ -28,10 +24,6 @@ object Dependencies {
 
     // aws
     const val AWS_S3 = "org.springframework.cloud:spring-cloud-starter-aws:${DependencyVersions.AWS_S3}"
-
-    // database
-    const val SPRING_JPA = "org.springframework.boot:spring-boot-starter-data-jpa"
-    const val MYSQL = "mysql:mysql-connector-java"
 
     // cloud config
     const val CLOUD_CONFIG = "org.springframework.cloud:spring-cloud-config-client"
