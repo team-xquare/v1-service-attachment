@@ -27,14 +27,15 @@ class ErrorHandlingFilter(
             if (e.cause is AttachmentException) {
                 errorToJson((e.cause as AttachmentException).errorCode, response)
             } else {
-                logger.error("INTERNAL_SERVER_ERROR", e)
                 errorToJson(ErrorCode.INTERNAL_SERVER_ERROR, response)
+                e.printStackTrace()
             }
         }
     }
 
     private fun errorToJson(errorCode: ErrorCode, response: HttpServletResponse) {
         response.status = errorCode.status
+        response.characterEncoding = "UTF-8"
         response.contentType = MediaType.APPLICATION_JSON_VALUE
         response.writer.write(objectMapper.writeValueAsString(ErrorResponse(errorCode)))
     }

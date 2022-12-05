@@ -20,7 +20,7 @@ class ImageUploadService(
     }
 
     internal fun File.isCorrectExtension(file: File) = when (file.extension.lowercase()) {
-        "jpg", "jpeg", "png", "heic" -> true
+        "jpg", "jpeg", "png", "heic", "webp" -> true
         else -> false
     }
 }
