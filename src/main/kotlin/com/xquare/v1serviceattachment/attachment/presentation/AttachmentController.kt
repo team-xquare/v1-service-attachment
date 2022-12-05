@@ -14,6 +14,6 @@ class AttachmentController(
 
     @PostMapping
     fun imageUpload(file: File) {
-        imageUploadService.execute(file);
+        imageUploadService.execute(file)
     }
 }

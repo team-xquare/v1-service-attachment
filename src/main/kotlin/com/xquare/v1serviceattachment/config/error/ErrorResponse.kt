@@ -5,9 +5,5 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 class ErrorResponse(
     @JsonIgnore
     val errorCode: ErrorCode,
-    val message: String = errorCode.message,
-) {
-
-    fun getStatus(): Int = errorCode.status
-
-}
+    val message: String = errorCode.message
+)

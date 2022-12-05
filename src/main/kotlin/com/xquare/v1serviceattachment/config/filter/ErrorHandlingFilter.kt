@@ -23,7 +23,7 @@ class ErrorHandlingFilter(
         } catch (e: AttachmentException) {
             errorToJson(e.errorCode, response)
         } catch (e: Exception) {
-            if(e.cause is AttachmentException) {
+            if (e.cause is AttachmentException) {
                 errorToJson((e.cause as AttachmentException).errorCode, response)
             } else {
                 logger.error("INTERNAL_SERVER_ERROR", e)
