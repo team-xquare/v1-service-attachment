@@ -6,12 +6,13 @@ import com.xquare.v1serviceattachment.config.error.ErrorCode
 import com.xquare.v1serviceattachment.config.error.ErrorResponse
 import org.springframework.http.MediaType
 import org.springframework.web.filter.OncePerRequestFilter
+import java.nio.charset.StandardCharsets
 import javax.servlet.FilterChain
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 class ErrorHandlingFilter(
-    val objectMapper: ObjectMapper
+    private val objectMapper: ObjectMapper
 ) : OncePerRequestFilter() {
 
     override fun doFilterInternal(
@@ -35,7 +36,7 @@ class ErrorHandlingFilter(
 
     private fun errorToJson(errorCode: ErrorCode, response: HttpServletResponse) {
         response.status = errorCode.status
-        response.characterEncoding = "UTF-8"
+        response.characterEncoding = StandardCharsets.UTF_8.name()
         response.contentType = MediaType.APPLICATION_JSON_VALUE
         response.writer.write(objectMapper.writeValueAsString(ErrorResponse(errorCode)))
     }

@@ -11,7 +11,7 @@ class ImageUploadService(
 ) {
 
     fun execute(file: File): String {
-        if (!file.isCorrectExtension(file)) {
+        if (!isCorrectExtension(file)) {
             file.delete()
             throw FileInvalidExtensionException
         }
@@ -19,8 +19,22 @@ class ImageUploadService(
         return awsS3Util.upload(file)
     }
 
-    internal fun File.isCorrectExtension(file: File) = when (file.extension.lowercase()) {
-        "jpg", "jpeg", "png", "heic", "webp" -> true
+    fun execute(files: List<File>): List<String> {
+        files.forEach {
+            if (!isCorrectExtension(it)) {
+                files.deleteAll()
+                throw FileInvalidExtensionException
+            }
+        }
+
+        return awsS3Util.upload(files)
+    }
+
+    private fun isCorrectExtension(file: File) = when (file.extension) {
+        "jpg", "jpeg", "png" -> true
         else -> false
     }
+
+    private fun List<File>.deleteAll() =
+        this.forEach(File::delete)
 }

@@ -18,12 +18,18 @@ class AwsS3Util(
 ) {
 
     fun upload(file: File): String {
-        inputS3(file, file.name)
+        inputS3(file)
 
         return getResource(file.name)
     }
 
-    private fun inputS3(file: File, fileName: String) {
+    fun upload(files: List<File>): List<String> {
+        return files.map {
+            inputS3(it)
+            getResource(it.name)
+        }
+    }
+    private fun inputS3(file: File) {
         try {
             val inputStream = file.inputStream()
             val objectMetadata = ObjectMetadata().apply {
@@ -32,7 +38,7 @@ class AwsS3Util(
             }
 
             amazonS3Client.putObject(
-                PutObjectRequest(awsS3Properties.bucket, fileName, inputStream, objectMetadata)
+                PutObjectRequest(awsS3Properties.bucket, file.name, inputStream, objectMetadata)
                     .withCannedAcl(
                         CannedAccessControlList.PublicRead
                     )
