@@ -8,7 +8,7 @@ enum class ErrorCode(
 
     INVALID_ARGUMENT(400, "Invalid Argument"),
 
-    INVALID_EXTENSION(400, "Allowed Extension : jpg(JPG), jpeg(JPEG), png(PNG), heic(HEIC)"),
+    INVALID_EXTENSION(400, "Allowed Extension : jpg(JPG), jpeg(JPEG), png(PNG), heic(HEIC), webp(WEBP)"),
 
     IO_INTERRUPTED(500, "Interrupted File IO");
 }
