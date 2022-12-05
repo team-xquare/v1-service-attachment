@@ -31,7 +31,7 @@ class ImageUploadService(
     }
 
     private fun isCorrectExtension(file: File) = when (file.extension) {
-        "jpg", "jpeg", "png" -> true
+        "jpg", "jpeg", "png", "heic", "webp"-> true
         else -> false
     }
 
