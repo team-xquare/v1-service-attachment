@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.xquare.v1serviceattachment.config.error.AttachmentException
 import com.xquare.v1serviceattachment.config.error.ErrorCode
 import com.xquare.v1serviceattachment.config.error.ErrorResponse
+import org.springframework.http.MediaType
 import org.springframework.web.filter.OncePerRequestFilter
 import javax.servlet.FilterChain
 import javax.servlet.http.HttpServletRequest
@@ -34,7 +35,7 @@ class ErrorHandlingFilter(
 
     private fun errorToJson(errorCode: ErrorCode, response: HttpServletResponse) {
         response.status = errorCode.status
-        response.contentType = "application/json"
+        response.contentType = MediaType.APPLICATION_JSON_VALUE
         response.writer.write(objectMapper.writeValueAsString(ErrorResponse(errorCode)))
     }
 }
