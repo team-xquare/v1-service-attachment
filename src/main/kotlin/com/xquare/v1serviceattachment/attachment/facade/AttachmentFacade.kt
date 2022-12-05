@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component
 import org.springframework.web.multipart.MultipartFile
 import java.io.File
 import java.io.FileOutputStream
-import java.util.*
+import java.util.UUID
 
 @Component
 class AttachmentFacade {
