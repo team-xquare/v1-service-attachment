@@ -21,7 +21,7 @@ class AttachmentController(
     fun imageUpload(file: MultipartFile) {
         imageUploadService.execute(file.let(attachmentFacade.transferFile()))
     }
-    
+
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("lists")
     fun uploadMultipleImage(files: List<MultipartFile>) {
