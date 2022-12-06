@@ -12,18 +12,12 @@ import org.springframework.web.multipart.MultipartFile
 @RestController
 @RequestMapping("/attachment")
 class AttachmentController(
-    private val imageUploadService: ImageUploadService,
-    private val attachmentFacade: AttachmentFacade
+    private val imageUploadService: ImageUploadService
 ) {
-    @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping
-    fun imageUpload(file: MultipartFile) {
-        imageUploadService.execute(file.let(attachmentFacade.transferFile()))
-    }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("lists")
+    @PostMapping
     fun uploadMultipleImage(files: List<MultipartFile>) {
-        imageUploadService.execute(files.map(attachmentFacade.transferFile()))
+        imageUploadService.execute(files)
     }
 }

@@ -17,12 +17,6 @@ class AwsS3Util(
     private val amazonS3Client: AmazonS3Client
 ) {
 
-    fun upload(file: File): String {
-        inputS3(file)
-
-        return getResource(file.name)
-    }
-
     fun upload(files: List<File>): List<String> {
         return files.map {
             inputS3(it)
