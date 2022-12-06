@@ -14,16 +14,16 @@ class ImageUploadService(
 ) {
 
     fun execute(files: List<MultipartFile>): List<String> {
-        val transfered = files.map(transferFile)
+        val transferred = files.map(transferFile)
 
-        files.forEach {
-            if (!isCorrectExtension(transfered)) {
-                transfered.deleteAll()
+        repeat(files.size) {
+            if (!isCorrectExtension(transferred)) {
+                transferred.deleteAll()
                 throw FileInvalidExtensionException
             }
         }
 
-        return awsS3Util.upload(transfered)
+        return awsS3Util.upload(transferred)
     }
 
     private fun isCorrectExtension(file: List<File>) = when (file.extension) {
