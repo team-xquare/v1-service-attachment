@@ -1,6 +1,5 @@
 package com.xquare.v1serviceattachment.attachment.presentation
 
-import com.xquare.v1serviceattachment.attachment.facade.AttachmentFacade
 import com.xquare.v1serviceattachment.attachment.service.ImageUploadService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.PostMapping
