@@ -13,22 +13,20 @@ class ImageUploadService(
     private val awsS3Util: AwsS3Util
 ) {
 
-    fun execute(files: List<MultipartFile>): List<String> {
+    fun execute(files: List<MultipartFile>, bucketName: String): List<String> {
         val transferred = files.map(transferFile)
 
-        repeat(files.size) {
-            if (!isCorrectExtension(transferred)) {
+        files.forEach { it ->
+            val originalName: String? = it.originalFilename
+            val extension: String? = originalName?.let { originalName.substring(it.lastIndexOf(".")) }
+
+            if (!(extension == ".jpg" || extension == ".jpeg" || extension == ".png" || extension == ".heic")) {
                 transferred.deleteAll()
                 throw FileInvalidExtensionException
             }
+
         }
-
-        return awsS3Util.upload(transferred)
-    }
-
-    private fun isCorrectExtension(file: List<File>) = when (file.extension) {
-        "jpg", "jpeg", "png", "heic", "webp" -> true
-        else -> false
+        return awsS3Util.upload(transferred, bucketName)
     }
 
     private fun List<File>.deleteAll() =

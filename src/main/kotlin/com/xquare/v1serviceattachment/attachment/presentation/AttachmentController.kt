@@ -1,5 +1,6 @@
 package com.xquare.v1serviceattachment.attachment.presentation
 
+import com.xquare.v1serviceattachment.attachment.presentation.dto.request.BucketNameRequest
 import com.xquare.v1serviceattachment.attachment.service.ImageUploadService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.PostMapping
@@ -16,7 +17,7 @@ class AttachmentController(
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    fun uploadMultipleImage(files: List<MultipartFile>) {
-        imageUploadService.execute(files)
+    fun uploadMultipleImage(files: List<MultipartFile>, request: BucketNameRequest) {
+        imageUploadService.execute(files, request.bucketName)
     }
 }
