@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
 import java.io.File
 import java.io.FileOutputStream
-import java.util.*
+import java.util.UUID
 
 @Service
 class ImageUploadService(
@@ -24,7 +24,6 @@ class ImageUploadService(
                 transferred.deleteAll()
                 throw FileInvalidExtensionException
             }
-
         }
         return awsS3Util.upload(transferred, bucketName)
     }
