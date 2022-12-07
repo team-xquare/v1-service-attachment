@@ -18,7 +18,7 @@ class ImageUploadService(
 
         files.forEach { it ->
             val originalName: String? = it.originalFilename
-            val extension: String? = originalName?.let { originalName.substring(it.lastIndexOf(".")) }
+            val extension: String? = originalName?.let { originalName.substring(it.lastIndexOf(".")).lowercase() }
 
             if (!(extension == ".jpg" || extension == ".jpeg" || extension == ".png" || extension == ".heic" || extension == ".webp")) {
                 transferred.deleteAll()
