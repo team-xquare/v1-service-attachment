@@ -6,14 +6,12 @@ import com.amazonaws.services.s3.model.CannedAccessControlList
 import com.amazonaws.services.s3.model.ObjectMetadata
 import com.amazonaws.services.s3.model.PutObjectRequest
 import com.xquare.v1serviceattachment.attachment.exception.FileIOInterruptedException
-import com.xquare.v1serviceattachment.attachment.properties.AwsS3Properties
 import org.springframework.stereotype.Component
 import java.io.File
 import java.io.IOException
 
 @Component
 class AwsS3Util(
-    private val awsS3Properties: AwsS3Properties,
     private val amazonS3Client: AmazonS3Client
 ) {
 
