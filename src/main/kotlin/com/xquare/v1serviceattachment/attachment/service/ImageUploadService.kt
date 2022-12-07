@@ -20,7 +20,7 @@ class ImageUploadService(
             val originalName: String? = it.originalFilename
             val extension: String? = originalName?.let { originalName.substring(it.lastIndexOf(".")) }
 
-            if (!(extension == ".jpg" || extension == ".jpeg" || extension == ".png" || extension == ".heic")) {
+            if (!(extension == ".jpg" || extension == ".jpeg" || extension == ".png" || extension == ".heic" || extension == ".webp")) {
                 transferred.deleteAll()
                 throw FileInvalidExtensionException
             }
