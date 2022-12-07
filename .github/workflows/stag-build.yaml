@@ -5,11 +5,12 @@ on:
       - main
 
 env:
-  SERVICE_NAME: user
+  SERVICE_NAME: attachment
   SERVICE_TYPE: be
 
 jobs:
   build:
+    environment: stag
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -33,7 +34,6 @@ jobs:
           arguments: |
             build
             --no-daemon
-            -x test
       - name: Login to ECR
         id: ecr
         uses: elgohr/ecr-login-action@master
@@ -63,5 +63,5 @@ jobs:
           client-payload: '{"ref": "${{ github.ref }}", 
                           "version": "${{ github.sha }}",
                           "service_name": "${{env.SERVICE_NAME}}",
-                          "service_type": "${{env.SERVICE_TYPE}}" }'
-          
+                          "service_type": "${{env.SERVICE_TYPE}}"}'
+
