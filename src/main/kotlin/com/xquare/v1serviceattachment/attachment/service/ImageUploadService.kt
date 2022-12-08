@@ -1,6 +1,7 @@
 package com.xquare.v1serviceattachment.attachment.service
 
 import com.xquare.v1serviceattachment.attachment.exception.FileInvalidExtensionException
+import com.xquare.v1serviceattachment.attachment.presentation.dto.response.UploadFileResponse
 import com.xquare.v1serviceattachment.thirdparty.s3.AwsS3Util
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
@@ -13,7 +14,7 @@ class ImageUploadService(
     private val awsS3Util: AwsS3Util
 ) {
 
-    fun execute(files: List<MultipartFile>, bucketName: String): List<String> {
+    fun execute(files: List<MultipartFile>, bucketName: String): UploadFileResponse {
         val transferred = files.map(transferFile)
 
         files.forEach { it ->
@@ -25,7 +26,9 @@ class ImageUploadService(
                 throw FileInvalidExtensionException
             }
         }
-        return awsS3Util.upload(transferred, bucketName)
+
+        val imageUrl = awsS3Util.upload(transferred, bucketName)
+        return UploadFileResponse(imageUrl)
     }
 
     private fun List<File>.deleteAll() =
