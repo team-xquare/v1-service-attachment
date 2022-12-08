@@ -5,5 +5,5 @@ import javax.validation.constraints.NotNull
 data class BucketNameRequest (
 
     @NotNull
-    val bucketName: String,
+    val bucketName: String
 )
