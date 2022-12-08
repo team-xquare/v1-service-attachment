@@ -5,6 +5,7 @@ import com.xquare.v1serviceattachment.attachment.service.ImageUploadService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestPart
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.multipart.MultipartFile
@@ -17,7 +18,7 @@ class AttachmentController(
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    fun uploadMultipleImage(files: List<MultipartFile>, request: BucketNameRequest) {
+    fun uploadMultipleImage(@RequestPart files: List<MultipartFile>, @RequestPart("bucketName") request: BucketNameRequest) {
         imageUploadService.execute(files, request.bucketName)
     }
 }
