@@ -19,7 +19,7 @@ class AttachmentController(
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    fun uploadMultipleImage(@RequestPart files: List<MultipartFile>, @RequestParam("bucketName") bucketName: String): UploadFileResponse {
+    fun uploadMultipleImage(@RequestPart files: List<MultipartFile>, @RequestParam("bn") bucketName: String): UploadFileResponse {
         return imageUploadService.execute(files, bucketName)
     }
 }
