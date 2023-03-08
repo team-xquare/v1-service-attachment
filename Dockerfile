@@ -9,5 +9,5 @@ ENV CLOUD_CONFIG_USERNAME ${CLOUD_CONFIG_USERNAME}
 ARG CLOUD_CONFIG_PASSWORD
 ENV CLOUD_CONFIG_PASSWORD ${CLOUD_CONFIG_PASSWORD}
 
-COPY ./build/libs/*.jar app.jar
+COPY /build/libs/*.jar app.jar
 ENTRYPOINT ["java", "-jar", "-Duser.timezone=Asia/Seoul", "/app.jar"]

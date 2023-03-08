@@ -34,6 +34,10 @@ jobs:
 
       - name: Gradle Build
         uses: gradle/gradle-build-action@v2
+        with:
+          arguments: |
+            build
+            --no-daemon
 
       - name: Login to ECR
         id: ecr
