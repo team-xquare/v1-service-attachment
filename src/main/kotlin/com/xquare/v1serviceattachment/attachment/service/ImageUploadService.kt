@@ -34,13 +34,14 @@ class ImageUploadService(
     private fun List<File>.deleteAll() =
         this.forEach(File::delete)
 
-    private val transferFile = { multipartFile: MultipartFile -> // TODO 함수 선언 순서도 깔끔하게 변경
-        File("${UUID.randomUUID()}@${multipartFile.originalFilename}").let {
-            FileOutputStream(it).run {
-                this.write(multipartFile.bytes)
-                this.close()
-            }
-            it
+    private val transferFile = { multipartFile: MultipartFile ->
+        val uniqueFilename = "${UUID.randomUUID()}@${multipartFile.originalFilename}"
+        val file = File(uniqueFilename)
+
+        FileOutputStream(file).use { outputStream ->
+            outputStream.write(multipartFile.bytes)
         }
+
+        file
     }
 }
