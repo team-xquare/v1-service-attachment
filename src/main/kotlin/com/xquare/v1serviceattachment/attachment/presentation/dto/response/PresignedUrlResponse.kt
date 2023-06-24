@@ -6,3 +6,4 @@ data class PresignedUrlResponse(
     val originalFilename: String,
     val contentType: String,
 )
+
