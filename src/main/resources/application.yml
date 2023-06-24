@@ -18,14 +18,8 @@ spring:
 cloud:
   aws:
     credentials:
-      access-key: ${s3.access}
-      secret-key: ${s3.secret}
-    s3:
-      bucket: ${s3.bucket}
-    region:
-      static: ${s3.region}
-    stack:
-      auto: false
+      accessKey: ${s3.access}
+      secretKey: ${s3.secret}
 
 logging:
   level:

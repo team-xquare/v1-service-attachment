@@ -23,7 +23,8 @@ object Dependencies {
     const val SENTRY = "io.sentry:sentry-spring-boot-starter:${DependencyVersions.SENTRY_VERSION}"
 
     // aws
-    const val AWS_S3 = "org.springframework.cloud:spring-cloud-starter-aws:${DependencyVersions.AWS_S3}"
+    const val AWS_S3 = "software.amazon.awssdk:s3"
+    const val AWS_S3_PLATFORM = "software.amazon.awssdk:bom:${DependencyVersions.AWS_S3}"
 
     // cloud config
     const val CLOUD_CONFIG = "org.springframework.cloud:spring-cloud-config-client"
