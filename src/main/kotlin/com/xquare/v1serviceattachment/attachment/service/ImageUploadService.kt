@@ -6,7 +6,6 @@ import com.xquare.v1serviceattachment.attachment.presentation.dto.request.ImageF
 import com.xquare.v1serviceattachment.attachment.presentation.dto.response.PresignedUrlResponse
 import com.xquare.v1serviceattachment.thirdparty.s3.AwsS3Util
 import org.springframework.stereotype.Service
-import org.springframework.web.multipart.MultipartFile
 import java.util.*
 
 @Service
@@ -22,14 +21,14 @@ class ImageUploadService(
             val extension: String = originalName.let { originalName.substring(it.lastIndexOf(".")).lowercase() }
             val contentType: String = it.contentType
 
-            if(checkContentType(extension,contentType)) throw FileInvalidContentTypeException
+            if (checkContentType(extension, contentType)) throw FileInvalidContentTypeException
 
             awsS3Util.getPresignedUrl(
                 originalName,
                 transferFile(originalName),
                 contentType,
                 it.fileSize,
-                bucketName
+                bucketName,
             )
         }
     }

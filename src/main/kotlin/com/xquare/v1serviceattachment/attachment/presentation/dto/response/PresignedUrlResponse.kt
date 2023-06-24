@@ -4,5 +4,5 @@ data class PresignedUrlResponse(
     val url: String,
     val presignedUrl: String,
     val originalFilename: String,
-    val contentType: String
+    val contentType: String,
 )

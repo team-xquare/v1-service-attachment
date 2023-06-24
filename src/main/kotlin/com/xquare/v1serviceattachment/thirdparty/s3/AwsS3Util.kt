@@ -20,7 +20,7 @@ class AwsS3Util(
             resourceUrl,
             presignedUrl,
             originFileName,
-            contentType
+            contentType,
         )
     }
 
