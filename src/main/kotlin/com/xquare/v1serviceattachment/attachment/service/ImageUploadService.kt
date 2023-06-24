@@ -1,47 +1,42 @@
 package com.xquare.v1serviceattachment.attachment.service
 
-import com.xquare.v1serviceattachment.attachment.exception.FileInvalidExtensionException
-import com.xquare.v1serviceattachment.attachment.presentation.dto.response.UploadFileResponse
+import com.xquare.v1serviceattachment.attachment.common.FileExt
+import com.xquare.v1serviceattachment.attachment.exception.FileInvalidContentTypeException
+import com.xquare.v1serviceattachment.attachment.presentation.dto.request.ImageFileRequest
+import com.xquare.v1serviceattachment.attachment.presentation.dto.response.PresignedUrlResponse
 import com.xquare.v1serviceattachment.thirdparty.s3.AwsS3Util
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
-import java.io.File
-import java.io.FileOutputStream
-import java.util.UUID
+import java.util.*
 
 @Service
 class ImageUploadService(
     private val awsS3Util: AwsS3Util
 ) {
 
-    fun execute(files: List<MultipartFile>, bucketName: String): UploadFileResponse {
-        val transferred = files.map(transferFile)
+    fun execute(files: List<ImageFileRequest>, bucketName: String): List<PresignedUrlResponse> {
+        return files.map { it ->
 
-        files.forEach { it ->
-            val originalName: String? = it.originalFilename
-            val extension: String? = originalName?.let { originalName.substring(it.lastIndexOf(".")).lowercase() }
+            val originalName: String = it.originalFilename
 
-            if (!(extension == ".jpg" || extension == ".jpeg" || extension == ".png" || extension == ".heic" || extension == ".webp")) {
-                transferred.deleteAll()
-                throw FileInvalidExtensionException
-            }
+            val extension: String = originalName.let { originalName.substring(it.lastIndexOf(".")).lowercase() }
+            val contentType: String = it.contentType
+
+            if(checkContentType(extension,contentType)) throw FileInvalidContentTypeException
+
+            awsS3Util.getPresignedUrl(
+                originalName,
+                transferFile(originalName),
+                contentType,
+                it.fileSize,
+                bucketName
+            )
         }
-
-        val imageUrl = awsS3Util.upload(transferred, bucketName)
-        return UploadFileResponse(imageUrl)
     }
 
-    private fun List<File>.deleteAll() =
-        this.forEach(File::delete)
-
-    private val transferFile = { multipartFile: MultipartFile ->
-        val uniqueFilename = "${UUID.randomUUID()}@${multipartFile.originalFilename}"
-        val file = File(uniqueFilename)
-
-        FileOutputStream(file).use { outputStream ->
-            outputStream.write(multipartFile.bytes)
-        }
-
-        file
+    private fun checkContentType(extension: String, contentType: String): Boolean = FileExt.values().none {
+        it.extension == extension && it.contentType == contentType
     }
+
+    private fun transferFile(originalFilename: String): String = "${UUID.randomUUID()}@${originalFilename}"
 }

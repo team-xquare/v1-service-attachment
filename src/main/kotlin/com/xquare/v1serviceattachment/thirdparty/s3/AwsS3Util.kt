@@ -1,49 +1,43 @@
 package com.xquare.v1serviceattachment.thirdparty.s3
 
-import com.amazonaws.services.s3.AmazonS3Client
-import com.amazonaws.services.s3.internal.Mimetypes
-import com.amazonaws.services.s3.model.CannedAccessControlList
-import com.amazonaws.services.s3.model.ObjectMetadata
-import com.amazonaws.services.s3.model.PutObjectRequest
-import com.xquare.v1serviceattachment.attachment.exception.FileIOInterruptedException
+import com.xquare.v1serviceattachment.attachment.presentation.dto.response.PresignedUrlResponse
 import org.springframework.stereotype.Component
-import java.io.File
-import java.io.IOException
+import software.amazon.awssdk.services.s3.model.PutObjectRequest
+import software.amazon.awssdk.services.s3.presigner.S3Presigner
+import software.amazon.awssdk.services.s3.presigner.model.PutObjectPresignRequest
+import java.time.Duration
 
 @Component
 class AwsS3Util(
-    private val amazonS3Client: AmazonS3Client
+    private val s3Presigner: S3Presigner,
 ) {
+    fun getPresignedUrl(originFileName: String, transferredName: String, contentType: String, fileSize: Long, bucketName: String) : PresignedUrlResponse {
+        val presignedUrl = getGeneratePreSignedUrlRequest(transferredName, contentType, fileSize, bucketName)
 
-    fun upload(files: List<File>, bucketName: String): List<String> {
-        return files.map {
-            inputS3(it, bucketName)
-            getResource(it.name, bucketName)
-        }
+        val resourceUrl = presignedUrl.substring(0, presignedUrl.lastIndexOf('?'))
+
+        return PresignedUrlResponse(
+            resourceUrl,
+            presignedUrl,
+            originFileName,
+            contentType
+        )
     }
 
-    private fun inputS3(file: File, bucketName: String) {
-        try {
-            val inputStream = file.inputStream()
-            val objectMetadata = ObjectMetadata().apply {
-                this.contentLength = file.length()
-                this.contentType = Mimetypes.getInstance().getMimetype(file)
-            }
+    private fun getGeneratePreSignedUrlRequest(fileName: String, contentType: String, fileSize: Long, bucketName: String): String {
 
-            amazonS3Client.putObject(
-                PutObjectRequest(bucketName, file.name, inputStream, objectMetadata)
-                    .withCannedAcl(
-                        CannedAccessControlList.PublicRead
-                    )
-            )
+        val objectRequest = PutObjectRequest.builder()
+            .bucket(bucketName)
+            .key(fileName)
+            .contentType(contentType)
+            .contentLength(fileSize)
+            .build()
 
-            file.delete()
-        } catch (e: IOException) {
-            throw FileIOInterruptedException
-        }
-    }
+        val presignedRequest = PutObjectPresignRequest.builder()
+            .signatureDuration(Duration.ofMinutes(3))
+            .putObjectRequest(objectRequest)
+            .build()
 
-    private fun getResource(fileName: String, bucketName: String): String {
-        return amazonS3Client.getResourceUrl(bucketName, fileName)
+        return s3Presigner.presignPutObject(presignedRequest).url().toString()
     }
 }

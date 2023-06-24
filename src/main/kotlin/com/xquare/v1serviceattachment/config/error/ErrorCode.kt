@@ -10,5 +10,7 @@ enum class ErrorCode(
 
     INVALID_EXTENSION(400, "Allowed Extension : jpg(JPG), jpeg(JPEG), png(PNG), heic(HEIC), webp(WEBP)"),
 
+    INVALID_CONTENT_TYPE(400, "Allowed ContentType : image/jpg, image/jpeg, image/png, image/heic, image/webp"),
+
     IO_INTERRUPTED(500, "Interrupted File IO");
 }
