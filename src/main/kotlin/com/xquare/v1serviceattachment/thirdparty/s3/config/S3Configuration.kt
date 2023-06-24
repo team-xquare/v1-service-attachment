@@ -20,8 +20,8 @@ class S3Configuration(
                     AwsBasicCredentials.create(
                         s3Property.accessKey,
                         s3Property.secretKey,
-                    )
-                )
+                    ),
+                ),
             )
             .region(Region.AP_NORTHEAST_2)
             .build()

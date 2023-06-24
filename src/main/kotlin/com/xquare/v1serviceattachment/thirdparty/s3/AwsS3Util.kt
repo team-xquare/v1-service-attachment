@@ -11,7 +11,7 @@ import java.time.Duration
 class AwsS3Util(
     private val s3Presigner: S3Presigner,
 ) {
-    fun getPresignedUrl(originFileName: String, transferredName: String, contentType: String, fileSize: Long, bucketName: String) : PresignedUrlResponse {
+    fun getPresignedUrl(originFileName: String, transferredName: String, contentType: String, fileSize: Long, bucketName: String): PresignedUrlResponse {
         val presignedUrl = getGeneratePreSignedUrlRequest(transferredName, contentType, fileSize, bucketName)
 
         val resourceUrl = presignedUrl.substring(0, presignedUrl.lastIndexOf('?'))
@@ -25,7 +25,6 @@ class AwsS3Util(
     }
 
     private fun getGeneratePreSignedUrlRequest(fileName: String, contentType: String, fileSize: Long, bucketName: String): String {
-
         val objectRequest = PutObjectRequest.builder()
             .bucket(bucketName)
             .key(fileName)
