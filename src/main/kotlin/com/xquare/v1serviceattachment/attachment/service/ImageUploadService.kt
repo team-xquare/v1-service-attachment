@@ -37,5 +37,5 @@ class ImageUploadService(
         it.extension == extension && it.contentType == contentType
     }
 
-    private fun transferFile(originalFilename: String): String = "${UUID.randomUUID()}@${originalFilename}"
+    private fun transferFile(originalFilename: String): String = "${UUID.randomUUID()}@$originalFilename"
 }
