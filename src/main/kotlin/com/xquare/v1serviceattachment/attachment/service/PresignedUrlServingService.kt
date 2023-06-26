@@ -10,7 +10,7 @@ import java.util.*
 
 @Service
 class PresignedUrlServingService(
-    private val awsS3Util: AwsS3Util
+    private val awsS3Util: AwsS3Util,
 ) {
 
     fun execute(files: List<ImageFileRequest>, bucketName: String): List<PresignedUrlResponse> {

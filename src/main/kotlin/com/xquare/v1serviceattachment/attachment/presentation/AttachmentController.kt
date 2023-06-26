@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/attachment")
 class AttachmentController(
-    private val imageUploadService: PresignedUrlServingService
+    private val imageUploadService: PresignedUrlServingService,
 ) {
 
     @ResponseStatus(HttpStatus.CREATED)
