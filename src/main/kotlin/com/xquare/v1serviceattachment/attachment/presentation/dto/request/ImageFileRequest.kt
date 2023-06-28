@@ -5,7 +5,7 @@ import javax.validation.constraints.Pattern
 import javax.validation.constraints.Positive
 
 data class ImageFileRequest(
-    @field:Pattern(regexp = "^.*\\.(jpg|jpeg|png|heic|webp)$", message = "올바른 파일명이 아닙니다")
+    @field:Pattern(regexp = "^[\\p{L}\\p{N}_]+(\\.[\\p{L}\\p{N}_]+)?\$", message = "올바른 파일명이 아닙니다")
     val originalFilename: String,
     @field:Pattern(regexp = "^\\s*([a-z]+)/([a-z0-9\\-+]+)\\s*(?:;(.*))?\$", message = "올바른 Content-Type이 아닙니다")
     val contentType: String,

@@ -1,6 +1,6 @@
 package com.xquare.v1serviceattachment.attachment.common
 
-enum class FileExt(
+enum class FileType(
     val extension: String,
     val contentType: String,
 ) {
