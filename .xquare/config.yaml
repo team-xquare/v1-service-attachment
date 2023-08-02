@@ -2,3 +2,4 @@ config:
   name: attachment
   prefix: /attachments
   service_type: be
+  port: 8080
