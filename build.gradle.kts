@@ -29,6 +29,7 @@ dependencies {
     implementation(Dependencies.KOTLIN_STDLIB)
     implementation(Dependencies.JACKSON)
     implementation(Dependencies.AWS_S3)
+    implementation(platform(Dependencies.AWS_S3_PLATFORM))
     implementation(Dependencies.SENTRY)
     implementation(Dependencies.CLOUD_CONFIG)
 }
