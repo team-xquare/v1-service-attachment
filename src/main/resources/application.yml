@@ -20,6 +20,7 @@ cloud:
     credentials:
       accessKey: ${s3.access}
       secretKey: ${s3.secret}
+      bucketName: ${s3.bucket}
 
 logging:
   level:

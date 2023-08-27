@@ -19,7 +19,7 @@ class AttachmentController(
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/")
-    fun uploadPresigendURL(@RequestBody files: List<ImageFileRequest>, @RequestParam("bucketName") bucketName: String): List<PresignedUrlResponse> {
-        return imageUploadService.execute(files, bucketName)
+    fun uploadPresigendURL(@RequestBody files: List<ImageFileRequest>): List<PresignedUrlResponse> {
+        return imageUploadService.execute(files)
     }
 }

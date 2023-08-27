@@ -8,4 +8,5 @@ import org.springframework.boot.context.properties.ConstructorBinding
 data class S3Property(
     val accessKey: String,
     val secretKey: String,
+    val bucketName: String,
 )

@@ -5,15 +5,17 @@ import com.xquare.v1serviceattachment.attachment.exception.InvalidFileTypeExcept
 import com.xquare.v1serviceattachment.attachment.presentation.dto.request.ImageFileRequest
 import com.xquare.v1serviceattachment.attachment.presentation.dto.response.PresignedUrlResponse
 import com.xquare.v1serviceattachment.thirdparty.s3.AwsS3Util
+import com.xquare.v1serviceattachment.thirdparty.s3.config.S3Property
 import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
 class PresignedUrlServingService(
     private val awsS3Util: AwsS3Util,
+    val s3Property: S3Property,
 ) {
 
-    fun execute(files: List<ImageFileRequest>, bucketName: String): List<PresignedUrlResponse> {
+    fun execute(files: List<ImageFileRequest>): List<PresignedUrlResponse> {
         return files.map { it ->
 
             val originalName: String = it.originalFilename
@@ -28,7 +30,7 @@ class PresignedUrlServingService(
                 transferFile(originalName),
                 contentType,
                 it.fileSize,
-                bucketName,
+                s3Property.bucketName,
             )
         }
     }
