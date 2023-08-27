@@ -18,7 +18,7 @@ class AttachmentController(
 ) {
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/")
+    @PostMapping("")
     fun uploadPresigendURL(@RequestBody files: List<ImageFileRequest>): List<PresignedUrlResponse> {
         return imageUploadService.execute(files)
     }
