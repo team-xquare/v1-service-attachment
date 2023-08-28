@@ -23,7 +23,7 @@ class PresignedUrlServingService(
             val extension: String = originalName.let { originalName.substringAfterLast(".").lowercase() }
             val contentType: String = it.contentType
 
-            if (!checkFileType(extension, contentType)) throw InvalidFileTypeException
+            if (checkFileType(extension, contentType)) throw InvalidFileTypeException
 
             awsS3Util.getPresignedUrl(
                 originalName,
