@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("/attachment")
@@ -19,7 +20,7 @@ class AttachmentController(
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
-    fun uploadPresigendURL(@RequestBody files: List<ImageFileRequest>): List<PresignedUrlResponse> {
+    fun uploadPresigendURL(@RequestBody @Valid files: List<ImageFileRequest>): List<PresignedUrlResponse> {
         return imageUploadService.execute(files)
     }
 }
