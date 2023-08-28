@@ -6,7 +6,7 @@ object Dependencies {
     const val SPRING_WEB = "org.springframework.boot:spring-boot-starter-web"
 
     // validation
-    const val VALIDATION = "org.springframework.boot:spring-boot-starter-validation"
+    const val VALIDATION = "org.springframework.boot:spring-boot-starter-validation:${DependencyVersions.VALIDATION_VERSION}"
 
     // kotlin
     const val KOTLIN_REFLECT = "org.jetbrains.kotlin:kotlin-reflect"
