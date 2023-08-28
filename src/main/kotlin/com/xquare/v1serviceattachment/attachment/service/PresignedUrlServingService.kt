@@ -20,7 +20,7 @@ class PresignedUrlServingService(
 
             val originalName: String = it.originalFilename
 
-            val extension: String = originalName.let { originalName.substring(it.lastIndexOf(".")).lowercase() }
+            val extension: String = originalName.let { originalName.substringAfterLast(".").lowercase() }
             val contentType: String = it.contentType
 
             if (!checkFileType(extension, contentType)) throw InvalidFileTypeException
