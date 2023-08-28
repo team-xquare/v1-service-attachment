@@ -2,11 +2,13 @@ package com.xquare.v1serviceattachment.attachment.presentation.dto.request
 
 import javax.validation.Valid
 import javax.validation.constraints.Max
+import javax.validation.constraints.Min
 import javax.validation.constraints.Pattern
 
 data class FileRequest(
-    @Valid
-    val imageFileRequests: List<ImageFileRequest>
+
+    @Min(1)
+    val imageFileRequests: List<@Valid ImageFileRequest>
 )
 
 data class ImageFileRequest(
