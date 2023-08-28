@@ -1,14 +1,10 @@
 package com.xquare.v1serviceattachment.attachment.presentation
 
-import com.xquare.v1serviceattachment.attachment.presentation.dto.request.FileRequest
+import com.xquare.v1serviceattachment.attachment.presentation.dto.request.ImageFileRequests
 import com.xquare.v1serviceattachment.attachment.presentation.dto.response.PresignedUrlResponse
 import com.xquare.v1serviceattachment.attachment.service.PresignedUrlServingService
 import org.springframework.http.HttpStatus
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.ResponseStatus
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
 @RestController
@@ -18,8 +14,8 @@ class AttachmentController(
 ) {
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("")
-    fun uploadPresigendURL(@RequestBody @Valid files: FileRequest): List<PresignedUrlResponse> {
+    @PostMapping
+    fun uploadPresigendURL(@RequestBody @Valid files: ImageFileRequests): List<PresignedUrlResponse> {
         return imageUploadService.execute(files.imageFileRequests)
     }
 }
