@@ -17,17 +17,18 @@ class AwsS3Util(
         val resourceUrl = presignedUrl.substring(0, presignedUrl.lastIndexOf('?'))
 
         return PresignedUrlResponse(
-            resourceUrl,
-            presignedUrl,
-            originFileName,
-            contentType,
+            url = resourceUrl,
+            presignedUrl = presignedUrl,
+            originalFilename = originFileName,
+            contentType = contentType,
         )
     }
 
     private fun getGeneratePreSignedUrlRequest(fileName: String, contentType: String, fileSize: Long, bucketName: String): String {
+        val key = "attachment/$fileName"
         val objectRequest = PutObjectRequest.builder()
             .bucket(bucketName)
-            .key(fileName)
+            .key(key)
             .contentType(contentType)
             .contentLength(fileSize)
             .build()
